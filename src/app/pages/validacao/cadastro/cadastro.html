@@ -1,1 +1,10 @@
 <h1>TESTANDO O CADASTRO</h1>
+
+
+<app-form
+    [title]="''"
+    [fields]="cadastroFields"
+    (dataChanged)="updateFormData($event)">
+</app-form>
+
+<app-button label="Cadastra-se"></app-button>

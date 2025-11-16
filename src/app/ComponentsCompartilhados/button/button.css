@@ -1,0 +1,10 @@
+  .btr { 
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+  }

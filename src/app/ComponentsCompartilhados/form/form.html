@@ -1,1 +1,25 @@
-<p>form works!</p>
+<div>
+@if (title) {
+    <h3>{{title}}</h3>
+}
+    <div class="forms">
+
+        <div>
+            @for (field of fields; track field.name) {
+                <div class="form-box">
+                    <label for="field.name" class="title-label">{{field.label}}</label>
+
+                    <input 
+                        [type]="field.type"
+                        [id]="field.name"
+                        [name]="field.name"
+                        [(ngModel)]="formData[field.name]"
+                        [placeholder]="field.placeholder"
+                        (ngModelChange)="onFieldChange()"
+                        required
+                        >
+                </div>
+            }
+        </div>
+    </div>
+</div>
