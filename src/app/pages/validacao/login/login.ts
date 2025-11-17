@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Form } from "../../../ComponentsCompartilhados/form/form";
 import { Button } from "../../../ComponentsCompartilhados/button/button";
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [Form, Button],
+  imports: [Form, Button, RouterModule],
   templateUrl: './login.html',
   styleUrls: ['./login.css'],
 })
@@ -62,17 +62,23 @@ export class Login {
       const permissao = usuario.permissao;
 
       if (permissao === 'administrador') {
-        this.router.navigate(['/admin']);
+        setTimeout(() => {
+          this.router.navigate(['/admin']);
+        }, 1500);
         return;
       }
 
       if (permissao === 'funcionario') {
-        this.router.navigate(['/funcionario']);
+        setTimeout(() => {
+          this.router.navigate(['/funcionario']);
+        }, 1500);
         return;
       }
 
       if (permissao === 'aluno') {
-        this.router.navigate(['/alunos']);
+        setTimeout(() => {
+          this.router.navigate(['/alunos']);
+        }, 1500);
         return;
       }
       this.message = "Permissão inválida. Entre em contato com o suporte.";
@@ -82,12 +88,6 @@ export class Login {
     } else {
       this.message = "Email e/ou senha incorretos. Tente novamente!";
     }
-  }
-
-  goCadastro() {
-    setTimeout(() => {
-      this.router.navigate(['/cadastro']);
-    }, 1500);
   }
 }
 

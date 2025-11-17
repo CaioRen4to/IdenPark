@@ -19,18 +19,14 @@ body {
 
 
 .header-card {
-    margin-bottom: 30px;
     position: relative;
     text-align: left; 
 }
 
 
-.back-link {
-    color: #555;
+.header-card a {
+    color: #0064cf;
     text-decoration: none;
-    font-size: 0.9rem;
-    display: block; 
-    margin-bottom: 20px;
 }
 
 .card h2 {

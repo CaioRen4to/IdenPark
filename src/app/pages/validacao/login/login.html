@@ -1,6 +1,7 @@
 <body>
-  <div class="card">    
-    <h1>LOGIN</h1>
+  <div class="card">   
+    <img src="/img/logosemfundo.png" alt="Finance Agenda Logo" /> 
+    <p class="subtitle">Realize o seu login</p>
       
     <app-form
       [fields]="loginFields" 
@@ -11,12 +12,12 @@
       label="Entrar" 
       (click)="login()"
     ></app-button>
-      
-    <app-button 
-      label="Ir para cadastro"
-      (click)="goCadastro()">
-    </app-button>
-     
+    
+    <div class="link-cadastro">
+      <p>Não tem cadastro?</p>
+      <a routerLink="/cadastro">Criar conta</a>
+    </div>
+         
     <div>
       @if (message) {
       <p>{{ message }}</p>
