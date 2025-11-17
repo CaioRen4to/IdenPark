@@ -6,7 +6,7 @@ import { Router, RouterLinkActive, RouterLink } from '@angular/router';
 @Component({
   selector: 'app-cadastro',
   standalone: true,
-  imports: [Button, Form, RouterLinkActive, RouterLink],
+  imports: [Button, Form, RouterLink],
   templateUrl: './cadastro.html',
   styleUrls: ['./cadastro.css'], 
 })

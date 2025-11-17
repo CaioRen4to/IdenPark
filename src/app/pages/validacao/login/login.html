@@ -1,24 +1,27 @@
-<h1>TESTANDO O LOGIN</h1>
-
-<app-form
-    [fields]="loginFields" 
-    (dataChanged)="updateFormData($event)"
-></app-form>
-
-<app-button 
-    label="Entrar" 
-    (click)="login()"
-></app-button>
-
-
-<app-button 
-  label="Ir para cadastro"
-  (click)="goCadastro()">
-</app-button>
-
-
-<div>
-  @if (message) {
-    <p>{{ message }}</p>
-  }
-</div>
+<body>
+  <div class="card">    
+    <h1>LOGIN</h1>
+      
+    <app-form
+      [fields]="loginFields" 
+      (dataChanged)="updateFormData($event)"
+    ></app-form>
+      
+    <app-button 
+      label="Entrar" 
+      (click)="login()"
+    ></app-button>
+      
+    <app-button 
+      label="Ir para cadastro"
+      (click)="goCadastro()">
+    </app-button>
+     
+    <div>
+      @if (message) {
+      <p>{{ message }}</p>
+      }
+    </div>
+    
+  </div>
+</body>
