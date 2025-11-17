@@ -1,25 +1,39 @@
-<div>
-@if (title) {
-    <h3>{{title}}</h3>
-}
-    <div class="forms">
+<div class="container">
+  <div class="form-box">
+    
+    @for (field of fields; track field.name) {
+      <div class="field-container">
+        <label [for]="field.name">{{ field.label }}</label>
 
-        <div>
-            @for (field of fields; track field.name) {
-                <div class="form-box">
-                    <label for="field.name" class="title-label">{{field.label}}</label>
-
-                    <input 
-                        [type]="field.type"
-                        [id]="field.name"
-                        [name]="field.name"
-                        [(ngModel)]="formData[field.name]"
-                        [placeholder]="field.placeholder"
-                        (ngModelChange)="onFieldChange()"
-                        required
-                        >
-                </div>
+        @if (!field.options) {
+          <input 
+            [type]="field.type"
+            [id]="field.name"
+            [name]="field.name"
+            [placeholder]="field.placeholder"
+            (change)="onFieldChange(field, $event)"
+            required
+          />
+        } @else {
+          <div class="radio-group">
+            @for (option of field.options; track option.value) {
+              <div class="radio-option">
+                <input 
+                  type="radio"
+                  [id]="field.name + '-' + option.value"
+                  [name]="field.name" 
+                  [value]="option.value"
+                  (change)="onFieldChange(field, $event)"
+                  required
+                />
+                <label  [for]="field.name + '-' + option.value">{{ option.label }}</label>
+              </div>
             }
-        </div>
-    </div>
+          </div>
+        }
+      </div>
+    } @empty {
+      <p>Nenhum campo de formulário definido.</p>
+    }
+  </div>
 </div>

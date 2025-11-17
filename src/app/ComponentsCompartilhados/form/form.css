@@ -1,0 +1,58 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  direction: column;
+}
+
+input {
+    background-color: #ffffff;
+    border: 1px solid #c2c2c2;
+    border-radius: 6px;
+    padding: 0.8rem; /* Ajustei para remover o padding vertical, apenas o horizontal será suficiente */
+    color: #3b3b3b;
+    margin-bottom: 1.5rem; /* Aumentei um pouco a margem inferior para dar mais espaço vertical */
+    width: 100%; /* <<== MUITO IMPORTANTE: Garante que ocupe a largura total */
+    box-sizing: border-box; /* <<== MUITO IMPORTANTE: Inclui padding e borda na largura total */
+    transition: border-color 0.3s ease;
+}
+
+.form label,
+label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #000000;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.title-label {
+    display: flex;
+    flex-direction: column;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; 
+    text-align: left;
+}
+
+
+.radio-option input[type="radio"] {
+    width: auto;
+    height: auto;
+    margin-right: 8px; 
+    margin-bottom: 0;
+}
+
+
+.radio-option label {
+    font-size: 1rem;
+    font-weight: normal;
+    margin-bottom: 0;
+    cursor: pointer;
+    color: #3b3b3b;
+}
+

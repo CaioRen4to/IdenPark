@@ -1,10 +1,26 @@
-<h1>TESTANDO O CADASTRO</h1>
+<body>
+  <div class="card">
+    <div class="header-card">
+      <a routerLink="/login">&#x2190; Voltar para login</a>
+    </div>
 
+    <h2>Criar Conta</h2>
+    <p class="subtitle">Faça o seu cadastro</p>
 
-<app-form
-    [title]="''"
-    [fields]="cadastroFields"
-    (dataChanged)="updateFormData($event)">
-</app-form>
+    <app-form
+        [fields]="cadastroFields"
+        (dataChanged)="updateFormData($event)"
+    ></app-form>
 
-<app-button label="Cadastra-se"></app-button>
+    <app-button 
+        label="Cadastrar-se" 
+        (click)="cadastrar()"
+    ></app-button>
+
+    <div>
+      @if (message) {
+        <p>{{ message }}</p>
+      }
+    </div>
+  </div>
+</body>

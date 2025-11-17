@@ -1,17 +1,19 @@
 import { Component } from '@angular/core';
 import { Button } from "../../../ComponentsCompartilhados/button/button";
 import { Form } from "../../../ComponentsCompartilhados/form/form";
-import { Route, Router } from '@angular/router';
+import { Router, RouterLinkActive, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro',
-  imports: [Button, Form],
+  standalone: true,
+  imports: [Button, Form, RouterLinkActive, RouterLink],
   templateUrl: './cadastro.html',
-  styleUrl: './cadastro.css',
+  styleUrls: ['./cadastro.css'], 
 })
 export class Cadastro {
+
   message: string = '';
-  formData: any = {};
+  formData: any = {}; 
 
   cadastroFields = [
     { 
@@ -32,6 +34,16 @@ export class Cadastro {
       name: 'senha', 
       placeholder: 'Digite sua senha' 
     },
+    {
+      label: 'Aluno, Funcionário ou Administrador?',
+      type: 'radio',
+      name: 'usuarioTipo', 
+      options: [
+        { label: 'Aluno', value: 'aluno' },
+        { label: 'Funcionário', value: 'funcionario' },
+        { label: 'Administrador', value: 'administrador' }
+      ]
+    }
   ];
 
   constructor(private router: Router) {}
@@ -41,33 +53,42 @@ export class Cadastro {
   }
 
   cadastrar() {
-    if (!this.formData.nome || !this.formData.email || !this.formData.senha) {
-      this.message = 'Por favor, preencha todos os campos.';
-      return;
+    this.message = '';
+
+    if (!this.formData.nome || 
+        !this.formData.email || 
+        !this.formData.senha || 
+        !this.formData.usuarioTipo
+    ) {
+        this.message = "Por favor, preencha todos os campos.";
+        return;
     }
 
     const newUser = {
-      nome: this.formData.nome,
-      email: this.formData.email,
-      senha: this.formData.senha,
+        nome: this.formData.nome,
+        email: this.formData.email,
+        password: this.formData.senha,
+        permissao: this.formData.usuarioTipo 
     };
 
-    const userJson = localStorage.getItem('users');
-    let users = userJson ? JSON.parse(userJson) : [];
+    const usersJson = localStorage.getItem('users');
+    const users: any[] = usersJson ? JSON.parse(usersJson) : [];
+    
+    const userExist = users.some(user => user.email === newUser.email);
 
-    const userExists = users.some((user: any) => user.email === newUser.email);
-    if (userExists) {
-      this.message = 'Este email já está cadastrado. Tente Fazer o Login';
-      return;
+    if (userExist) {
+        this.message = 'Email já está cadastrado. Tente fazer o Login!';
+        return;
     }
 
     users.push(newUser);
     localStorage.setItem('users', JSON.stringify(users));
 
-    this.message = 'Cadastro realizado com sucesso! Redirecionando para o login...';
+    this.message = "Cadastro realizado com sucesso! Redirecionando...";
 
     setTimeout(() => {
-      this.router.navigate(['/login']);
-    }, 2000);
+        this.router.navigate(['/login']); 
+    }, 1000);
   }
+  
 }
