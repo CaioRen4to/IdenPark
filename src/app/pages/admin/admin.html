@@ -1,1 +1,100 @@
-<p>admin works!</p>
+<main class="page-container">
+<app-sidebar></app-sidebar>
+<div class="main-page">
+<div class="page-header">
+<h1>{{ currentPageTitle() }}</h1>
+<div class="page-buttons">
+<button (click)="showPage('dashboard')">Dashboard</button>
+<button (click)="showPage('usuarios')">Usuários</button>
+<button (click)="showPage('veiculos')">Veículos</button>
+</div>
+</div>
+<div *ngIf="activePage() === 'dashboard'" class="dashboard">
+<div class="stat-cards">
+<div *ngFor="let card of statCards()" class="stat-card" [style.borderColor]="card.color">
+<div class="stat-value">{{ card.value }}</div>
+<div class="stat-label">{{ card.label }} <span>{{ card.icon }}</span></div>
+</div>
+</div>
+<div class="dashboard-sections">
+<div class="section-card">
+<h3>Status das Cancelas</h3>
+<div *ngFor="let gate of gatesStatus()" class="gate-status-item">
+<span>{{ gate.name }} - {{ gate.detail }}</span>
+<span [class.online]="gate.status==='ONLINE'" [class.offline]="gate.status==='OFFLINE'">{{ gate.status }}</span>
+</div>
+</div>
+<div class="section-card">
+<h3>Eventos Recentes</h3>
+<div *ngFor="let event of recentEvents()" class="event-item">
+<span>{{ event.title }} ({{ event.subtitle }})</span>
+<span>{{ event.type }} - {{ event.time }}</span>
+</div>
+</div>
+</div>
+</div>
+<div *ngIf="activePage() === 'usuarios'" class="list-view">
+<div class="list-actions">
+<button (click)="showPage('usuarios')">Atualizar</button>
+<button (click)="openAddUserModal()" class="add-button">Adicionar Usuário</button>
+</div>
+<table>
+<thead>
+<tr>
+<th>Nome</th>
+<th>Email</th>
+<th>Tipo</th>
+<th>Status</th>
+<th>Saldo</th>
+<th class="actions-column">Ações</th>
+</tr>
+</thead>
+<tbody>
+<tr *ngFor="let user of usersList()">
+<td>{{ user.nome }}</td>
+<td>{{ user.email }}</td>
+<td>{{ user.tipo }}</td>
+<td>{{ user.status }}</td>
+<td>{{ user.saldo }}</td>
+<td class="actions-column">
+<button class="edit-btn" (click)="editUser(user)">Editar</button>
+<button class="delete-btn" (click)="deleteUser(user.id)">Deletar</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div *ngIf="activePage() === 'veiculos'" class="list-view">
+<div class="list-actions">
+<button (click)="openAddVehicleModal()" class="add-button">Adicionar Veículo</button>
+</div>
+<table>
+<thead>
+<tr>
+<th>Placa</th>
+<th>Modelo</th>
+<th>Cor</th>
+<th>Usuário</th>
+<th>Tipo</th>
+<th>Status</th>
+<th class="actions-column">Ações</th>
+</tr>
+</thead>
+<tbody>
+<tr *ngFor="let vehicle of vehiclesList()">
+<td>{{ vehicle.placa }}</td>
+<td>{{ vehicle.modelo }}</td>
+<td>{{ vehicle.cor }}</td>
+<td>{{ vehicle.usuario }}</td>
+<td>{{ vehicle.tipo }}</td>
+<td>{{ vehicle.status }}</td>
+<td class="actions-column">
+<button class="edit-btn" (click)="editVehicle(vehicle)">Editar</button>
+<button class="delete-btn" (click)="deleteVehicle(vehicle.id)">Deletar</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>

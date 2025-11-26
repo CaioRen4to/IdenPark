@@ -1,4 +1,4 @@
-<div class="container">
+<div class="form-container">
   <div class="form-box">
     
     @for (field of fields; track field.name) {
@@ -17,17 +17,16 @@
         } @else {
           <div class="radio-group">
             @for (option of field.options; track option.value) {
-              <div class="radio-option">
+              <label class="radio-option">
                 <input 
                   type="radio"
                   [id]="field.name + '-' + option.value"
                   [name]="field.name" 
                   [value]="option.value"
                   (change)="onFieldChange(field, $event)"
-                  required
                 />
-                <label  [for]="field.name + '-' + option.value">{{ option.label }}</label>
-              </div>
+                <span>{{ option.label }}</span>
+              </label>
             }
           </div>
         }
@@ -35,5 +34,6 @@
     } @empty {
       <p>Nenhum campo de formulário definido.</p>
     }
+
   </div>
 </div>
