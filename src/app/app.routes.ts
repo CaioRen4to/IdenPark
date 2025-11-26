@@ -11,10 +11,9 @@ export const routes: Routes = [
     path: 'cadastro', 
     loadComponent: () => import('./pages/validacao/cadastro/cadastro').then(m => m.Cadastro) 
   },
-
-  { 
-    path: 'admin', 
-    loadComponent: () => import('./pages/admin/admin').then(m => m.Admin) 
+  {
+  path: 'admin',
+  loadComponent: () => import('./pages/admin/admin').then(m => m.Admin)
   },
 
   { 
