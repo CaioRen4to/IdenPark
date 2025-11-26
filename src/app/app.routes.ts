@@ -26,7 +26,13 @@ export const routes: Routes = [
     path: 'alunos', 
     loadComponent: () => import('./pages/alunos/alunos').then(m => m.Alunos) 
   },
+
+  {
+    path: 'carteira',
+    loadComponent: () => import('./pages/carteira/carteira').then(m => m.Carteira)
+  },
+  
   { 
     path: '', redirectTo: '/login', pathMatch: 'full' 
-  },
+  }
 ];
