@@ -1,95 +1,152 @@
 .main-page {
-  padding: 20px;
-  font-family: 'Inter', sans-serif;
-  background-color: #1e2029;
-  color: #f5f5f5;
+padding: 20px;
+font-family: 'Inter', sans-serif;
+background-color: #1e2029;
+color: #f5f5f5;
 }
 
 .page-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 20px;
 }
 
 .page-buttons button {
-  margin-right: 10px;
-  padding: 8px 15px;
-  background-color: #4a90e2;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
+margin-right: 10px;
+padding: 8px 15px;
+background-color: #4a90e2;
+color: #fff;
+border: none;
+border-radius: 6px;
+cursor: pointer;
 }
 
 .page-buttons button:hover {
-  background-color: #3a7fd4;
+background-color: #3a7fd4;
 }
 
 .stat-cards {
-  display: flex;
-  gap: 15px;
-  margin-bottom: 20px;
+display: flex;
+gap: 15px;
+margin-bottom: 20px;
 }
 
 .stat-card {
-  background-color: #282a36;
-  padding: 15px;
-  border-left: 5px solid;
-  border-radius: 8px;
-  flex: 1;
+background-color: #282a36;
+padding: 15px;
+border-left: 5px solid;
+border-radius: 8px;
+flex: 1;
 }
 
 .dashboard-sections {
-  display: flex;
-  gap: 20px;
+display: flex;
+gap: 20px;
 }
 
 .section-card {
-  background-color: #282a36;
-  padding: 15px;
-  border-radius: 8px;
-  flex: 1;
+background-color: #282a36;
+padding: 15px;
+border-radius: 8px;
+flex: 1;
 }
 
 .gate-status-item, .event-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 5px 0;
+display: flex;
+justify-content: space-between;
+padding: 5px 0;
 }
 
 .online {
-  color: #50e3c2;
+color: #50e3c2;
 }
 
 .offline {
-  color: #d0021b;
+color: #d0021b;
 }
 
 table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
+width: 100%;
+border-collapse: collapse;
+margin-top: 10px;
 }
 
 th, td {
-  padding: 10px;
-  border-bottom: 1px solid #3f414a;
+padding: 10px;
+border-bottom: 1px solid #3f414a;
 }
 
 th {
-  text-transform: uppercase;
-  color: #8c8d96;
+text-transform: uppercase;
+color: #8c8d96;
 }
 
 .page-container {
-  display: flex;
-  min-height: 100vh;
+display: flex;
+min-height: 100vh;
 }
 
 .main-page {
-  flex-grow: 1;
-  padding: 20px;
-  background-color: var(--bg-dark);
-  overflow-y: auto;
+flex-grow: 1;
+padding: 20px;
+background-color: var(--bg-dark);
+overflow-y: auto;
+}
+
+/* ================== NOVOS ESTILOS PARA AÇÕES ================== */
+
+.list-actions {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 15px;
+}
+
+.list-actions button {
+margin-left: 10px;
+}
+
+.list-actions button:first-child {
+margin-left: 0;
+}
+
+.add-button {
+background-color: #2ecc71 !important;
+}
+
+.add-button:hover {
+background-color: #27ae60 !important;
+}
+
+.actions-column {
+width: 160px;
+text-align: center;
+}
+
+.edit-btn, .delete-btn {
+padding: 5px 8px;
+margin: 0 3px;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+font-size: 12px;
+}
+
+.edit-btn {
+background-color: #f39c12;
+color: #1e2029;
+}
+
+.edit-btn:hover {
+background-color: #e67e22;
+}
+
+.delete-btn {
+background-color: #e74c3c;
+color: #fff;
+}
+
+.delete-btn:hover {
+background-color: #c0392b;
 }
