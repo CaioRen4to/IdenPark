@@ -9,6 +9,8 @@ import { Sidebar } from '../../ComponentsCompartilhados/sidebar/sidebar';
   templateUrl: './funcionario.html',
   styleUrl: './funcionario.css',
 })
+
+
 export class Funcionario {
 
 }

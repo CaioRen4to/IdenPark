@@ -1,3 +1,369 @@
-.titulo-funcionario h1{
+*{
     font-family: "Poppins", sans-serif;
+}
+.opcoes{
+    display: flex;
+    gap: 30px;
+}
+.box-opc{
+    border: 1px solid rgb(231, 231, 231);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    width: 250px;
+    padding: 20px;
+    background: #0b0e13;
+    transition: box-shadow ease 0.3s, transform ease 0.3s;
+    color: antiquewhite;
+}
+.box-opc:hover{
+    box-shadow: 0 5px 10px rgb(91, 117, 119);
+    transform: translateY(-3px);
+}
+.funcionario-painel{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 50px;
+    width: 100%;
+    height: 100vh;
+    min-height: 100vh;
+    background: #0b0e13;
+    overflow-y: scroll;
+    scrollbar-color: blue;
+}
+.box-text{
+    width: 50px;
+}
+#funcionario{
+    color: black;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    width: 50px;
+    background: rgb(33, 145, 237);
+    padding: 10px;
+    height: 50px;
+    margin-right: 20px;
+}
+#veiculo{
+    color: black;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    width: 50px;
+    background: rgb(68, 156, 68);
+    padding: 10px;
+    height: 50px;
+    margin-right: 20px;
+}
+#entrada{
+    color: black;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    width: 50px;
+    background: rgb(237, 156, 33);
+    padding: 10px;
+    height: 50px;
+    margin-right: 20px;
+}
+#saida{
+    color: black;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    width: 50px;
+    background: rgb(255, 122, 206);
+    padding: 10px;
+    height: 50px;
+    margin-right: 20px;
+}
+.box-saldo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    background: linear-gradient(to left,rgb(0, 38, 69), rgb(0, 45, 45));
+    color: aliceblue;
+    width: 1090px;
+    height: 200px;
+    border-radius: 10px;
+    gap: 5px;
+}
+.box-saldo h2{
+    font-size: 50px;
+    color: aquamarine;
+    font-family: "Poppins", sans-serif;
+}
+.painelCard{
+     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+/* ===== SEÇÃO DE CADASTRO ===== */
+.secao-cadastro {
+    background: black;
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid rgb(231, 231, 231);
+    margin-bottom: 30px;
+}
+
+.secao-cadastro h2 {
+    margin: 0 0 20px 0;
+    font-size: 20px;
+    color: #2c3e50;
+}
+
+.secao-cadastro form {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    align-items: end;
+}
+
+.secao-cadastro input,
+.secao-cadastro select {
+
+    padding: 12px;
+    border: none;
+    background: none;
+    border-bottom: 1px solid whitesmoke ;
+    outline: none;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.secao-cadastro input:focus,
+.secao-cadastro select:focus {
+    outline: none;
+    border-color: rgb(33, 145, 237);
+}
+
+.secao-cadastro button {
+    grid-column: span 4;
+    padding: 12px;
+    background: rgb(33, 145, 237);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.secao-cadastro button:hover {
+    background: rgb(25, 118, 194);
+    transform: scale(1.02);
+}
+
+/* ===== SEÇÃO DE VEÍCULOS ===== */
+.secao-veiculos {
+    background: black;
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.titulo-secao {
+    margin-bottom: 25px;
+}
+
+.titulo-secao h2 {
+    font-size: 24px;
+    color: whitesmoke;
+    margin: 0 0 5px 0;
+}
+
+.titulo-secao p {
+    font-size: 14px;
+    color: whitesmoke;
+    margin: 0;
+}
+
+/* ===== LISTA DE VEÍCULOS ===== */
+.lista-veiculos {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.veiculo-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background: rgb(38, 38, 38);
+    border-radius: 10px;
+    border-left: 4px solid rgb(33, 145, 237);
+    transition: all 0.3s;
+}
+
+.veiculo-card:hover {
+    background: #e9ecef;
+    transform: translateX(5px);
+}
+
+.veiculo-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.veiculo-icone {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 24px;
+    color: black;
+}
+
+.veiculo-icone.carro {
+    background: rgb(33, 145, 237);
+}
+
+.veiculo-icone.moto {
+    background: rgb(68, 156, 68);
+}
+
+.veiculo-detalhes h3 {
+    font-size: 18px;
+    color: #2c3e50;
+    margin: 0 0 5px 0;
+}
+
+.veiculo-detalhes p {
+    font-size: 14px;
+    color: #7f8c8d;
+    margin: 0;
+}
+
+.proprietario {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 5px !important;
+}
+
+.veiculo-tempo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+}
+
+.tempo {
+    font-size: 20px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.entrada {
+    font-size: 12px;
+    color: #7f8c8d;
+}
+
+.btn-saida {
+    padding: 12px 24px;
+    background: rgb(255, 122, 206);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+}
+
+.btn-saida:hover {
+    background: rgb(230, 97, 181);
+    transform: scale(1.05);
+}
+
+/* ===== VAZIO ===== */
+.vazio {
+    text-align: center;
+    padding: 60px 20px;
+    color: #95a5a6;
+}
+
+.vazio i {
+    font-size: 64px;
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+.vazio p {
+    font-size: 16px;
+    margin: 0;
+}
+
+/* ===== HISTÓRICO ===== */
+.secao-historico {
+    background: rgb(37, 37, 37);
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid rgb(231, 231, 231);
+}
+
+.lista-historico {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.historico-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: #0b0e13;
+    border-radius: 8px;
+}
+
+.historico-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.historico-info i {
+    font-size: 24px;
+    color: rgb(33, 145, 237);
+}
+
+.historico-info strong {
+    display: block;
+    font-size: 16px;
+    color: #95a5a6;
+}
+
+.historico-info span {
+    font-size: 12px;
+    color: #7f8c8d;
+}
+
+.historico-hora {
+    font-size: 14px;
+    color: #95a5a6;
 }

@@ -1,57 +1,154 @@
-<div>
+<div class="funcionario-painel">
     <div class="titulo-funcionario">
         <h1>Painel do Funcionário</h1>
         <p>Gerenciar as operações e os registros de estacionamento.</p>
     </div>
-    <div class="opcoes">
-        <div>
-            <i>icone</i>
-            <div>
-                <h2>Registrar Entrada</h2>
-                <p>Registrar chegada do veículo</p>
+    <div class="painelCard">
+        <div class="opcoes">
+            <div class="box-opc">
+                <div id="funcionario">
+                    <i class="bi bi-person-check"></i>
+                </div>
+                <div class="box-text">
+                    <h3>Funcionários Ativos</h3>
+                    <h2>{{funcionariosAtivos}}</h2>
+                </div>
+            </div>
+            <div class="box-opc">
+                <div id="veiculo">
+                    <i class="bi bi-car-front-fill"></i>
+                </div>
+                <div class="box-text">
+                    <h3>Veiculos Cadastrados</h3>
+                    <h2>{{veiculos.length}}</h2>
+                </div>
+            </div>
+            <div class="box-opc">
+                <div id="entrada">
+                    <i class="bi bi-door-open"></i>
+                </div>
+                <div class="box-text">
+                    <h3>Entradas Hoje</h3>
+                    <h2>{{entradasHoje }}</h2>
+                </div>
+            </div>
+            <div class="box-opc">
+                <div id="saida">
+                    <i class="bi bi-door-closed"></i>
+                </div>
+                <div class="box-text">
+                    <h3>Saidas Hoje</h3>
+                    <h2>{{ saidasHoje }}</h2>
+                </div>
             </div>
         </div>
-        <div>
-            <i>icone</i>
-            <div>
-                <h2>Registrar Saída</h2>
-                <p>Registrar a saída do veículo</p>
-            </div>
-        </div>
-        <div>
-            <i>icone</i>
-            <div>
-                <h2>Historico</h2>
-                <p>Registro de Movimentos</p>
-            </div>
-        </div>
-        <div>
-            <i>icone</i>
-            <div>
-                <h2>Gerenciar Tabelas</h2>
-                <p>Visualizar e Editar Registro</p>
+        <div class="estatisticas">
+            <div class="box-saldo">
+                <p>Saldo Total em co</p>
+                <h2>R$ {{ saldoTotal.toFixed(2) }}</h2>
+                <p>Estatísticas do dia atual</p>
             </div>
         </div>
     </div>
-    <div class="estatisticas">
-        <div class="titulo-estatisticas">
-            <h2>Resulmo de Hoje</h2>
-            <p>Estatísticas do dia atual</p>
+    <div class="secao-veiculos">
+        <div class="titulo-secao">
+            <h2>Veículos Estacionados ({{ veiculosEstacionados.length }})</h2>
+            <p>Veículos atualmente no estacionamento</p>
         </div>
-        <div class="dados-estatisticas">
-            <div>
-                <h2>Total de Entradas</h2>
-                <h3>...</h3>
-            </div>
-            <div>
-                <h2>Total de Saídas</h2>
-                <h3>...</h3>
-            </div>
-            <div>
-                <h2>Atualmente Estacionado</h2>
-                <h3>...</h3>
-            </div>
+
+         <div class="secao-cadastro">
+        <h2>Cadastrar Veículo</h2>
+        
+        <form (submit)="adicionarVeiculo(); $event.preventDefault()">
+            <input 
+            type="text" 
+            [(ngModel)]="novoVeiculo.placa"
+            name="placa"
+            placeholder="Placa (ex: ABC-1234)"
+            required
+            />
+            
+            <input 
+            type="text" 
+            [(ngModel)]="novoVeiculo.modelo"
+            name="modelo"
+            placeholder="Modelo"
+            />
+            
+            <input 
+            type="text" 
+            [(ngModel)]="novoVeiculo.cor"
+            name="cor"
+            placeholder="Cor"
+            />
+            
+            <select 
+            [(ngModel)]="novoVeiculo.tipo"
+            name="tipo"
+            required
+            >
+            <option value="">Tipo de veículo</option>
+            <option value="carro">Carro</option>
+            <option value="moto">Moto</option>
+            <option value="caminhonete">Caminhonete</option>
+            </select>
+            
+            <button type="submit">Cadastrar</button>
+        </form>
+    </div>
+
+
+    <div class="vazio" *ngIf="veiculosEstacionados.length === 0">
+      <i class="bi bi-car-front"></i>
+      <p>Nenhum veículo estacionado no momento</p>
+    </div>
+
+        <div class="lista-veiculos" *ngIf="veiculosEstacionados.length > 0">
+      <div class="veiculo-card" *ngFor="let veiculo of veiculosEstacionados; let i = index">
+        
+        <div class="veiculo-info">
+          <div class="veiculo-icone" [class.carro]="veiculo.tipo === 'carro'" 
+                                       [class.moto]="veiculo.tipo === 'moto'">
+            <i class="bi bi-car-front-fill" *ngIf="veiculo.tipo === 'carro'"></i>
+            <i class="bi bi-scooter" *ngIf="veiculo.tipo === 'moto'"></i>
+            <i class="bi bi-truck" *ngIf="veiculo.tipo === 'caminhonete'"></i>
+          </div>
+
+          <div class="veiculo-detalhes">
+            <h3>{{ veiculo.placa }}</h3>
+            <p>{{ veiculo.modelo }} - {{ veiculo.cor }}</p>
+            <p *ngIf="veiculo.proprietario" class="proprietario">
+              <i class="bi bi-person"></i> {{ veiculo.proprietario }}
+            </p>
+          </div>
         </div>
+        <div class="veiculo-tempo">
+          <span class="tempo">{{ calcularTempo(veiculo.horaEntrada) }}</span>
+          <span class="entrada">Entrada: {{ veiculo.horaEntrada | date:'HH:mm' }}</span>
+        </div>
+
+        <div class="veiculo-acoes">
+          <button class="btn-saida" (click)="registrarSaida(i)">
+            <i class="bi bi-box-arrow-right"></i>
+            Registrar Saída
+          </button>
+        </div>
+
+      </div>
+
+    <div class="lista-historico">
+      <div class="historico-item" *ngFor="let item of historico.slice(0, 5)">
+        <div class="historico-info">
+          <i class="bi bi-arrow-right-circle" *ngIf="item.tipo === 'entrada'"></i>
+          <i class="bi bi-arrow-left-circle" *ngIf="item.tipo === 'saida'"></i>
+          <div>
+            <strong>{{ item.placa }}</strong>
+            <span>{{ item.tipo === 'entrada' ? 'Entrada' : 'Saída' }}</span>
+          </div>
+        </div>
+        <span class="historico-hora">{{ item.hora | date:'HH:mm' }}</span>
+      </div>
+    </div>
     </div>
     <div>
         <h2>Atividade Recente</h2>

@@ -1,3 +1,6 @@
 .td-fun{
     display: flex;
 }
+main{
+    width: 100vw;
+}
