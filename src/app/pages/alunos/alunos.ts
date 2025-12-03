@@ -6,7 +6,7 @@ import { AlunoDashboard } from '../../ComponentsCompartilhados/aluno-dashboard/a
 @Component({
   selector: 'app-alunos',
   standalone: true,
-  imports: [RouterOutlet, Sidebar, AlunoDashboard],
+  imports: [ Sidebar, AlunoDashboard],
   templateUrl: './alunos.html',
   styleUrls: ['./alunos.css'],
 })
