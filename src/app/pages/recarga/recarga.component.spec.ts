@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DashboardCarteira } from './dashboard-carteira';
+import { RecargaComponent } from './recarga.component';
 
-describe('DashboardCarteira', () => {
-  let component: DashboardCarteira;
-  let fixture: ComponentFixture<DashboardCarteira>;
+describe('RecargaComponent', () => {
+  let component: RecargaComponent;
+  let fixture: ComponentFixture<RecargaComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DashboardCarteira]
+      imports: [RecargaComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DashboardCarteira);
+    fixture = TestBed.createComponent(RecargaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

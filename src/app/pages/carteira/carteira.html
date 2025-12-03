@@ -1,4 +1,34 @@
 <div class="layout">
-    <app-sidebar class="sidebar"></app-sidebar>
-    <app-dashboard-carteira class="dashboard"></app-dashboard-carteira>
+  <app-sidebar></app-sidebar>
+
+  <main class="content">
+    <section class="wallet-card">
+      <h1>Carteira / Saldo</h1>
+      <p class="subtitle">
+        Aqui você acompanha seu saldo disponível para utilizar o estacionamento.
+      </p>
+
+      <div class="saldo-box" *ngIf="user">
+        <span class="label">Saldo atual</span>
+        <span class="value">{{ saldoAtual | currency: 'BRL' : 'symbol' : '1.2-2' }}</span>
+
+        <div class="actions">
+          <button class="primary-btn" routerLink="/recarga">
+            Recarregar saldo
+          </button>
+        </div>
+
+        <p class="hint">
+          As recargas e débitos aparecem no seu
+          <a routerLink="/historico">Histórico / Extrato</a>.
+        </p>
+      </div>
+
+      <p *ngIf="!user">
+        Nenhum usuário logado. Faça login para visualizar sua carteira.
+      </p>
+    </section>
+  </main>
 </div>
+
+

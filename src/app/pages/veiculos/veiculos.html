@@ -1,0 +1,92 @@
+<div class="layout">
+  <app-sidebar></app-sidebar>
+
+  <main class="content">
+    <section class="vehicles-card">
+      <h1>Gestão de Veículos</h1>
+      <p class="subtitle">
+        Cadastre e gerencie os veículos que podem utilizar o estacionamento na sua conta.
+      </p>
+
+      <div *ngIf="!user">
+        <p>Nenhum usuário logado. Faça login para gerenciar seus veículos.</p>
+      </div>
+
+      <div *ngIf="user">
+        <div class="toolbar">
+          <button class="primary-btn" (click)="abrirNovo()">Adicionar Veículo</button>
+        </div>
+
+        <table class="data-table" *ngIf="veiculos.length; else semVeiculos">
+          <thead>
+            <tr>
+              <th>Placa</th>
+              <th>Modelo</th>
+              <th>Cor</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let v of veiculos">
+              <td>{{ v.placa }}</td>
+              <td>{{ v.modelo }}</td>
+              <td>{{ v.cor }}</td>
+              <td>
+                <span class="tag" [class.tag-ativo]="v.ativo" [class.tag-inativo]="!v.ativo">
+                  {{ v.ativo ? 'Ativo' : 'Inativo' }}
+                </span>
+              </td>
+              <td>
+                <button class="edit-btn" (click)="editar(v)">Editar</button>
+                <button class="delete-btn" (click)="excluir(v)">Remover</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <ng-template #semVeiculos>
+          <p class="empty">Nenhum veículo cadastrado ainda.</p>
+        </ng-template>
+      </div>
+
+      <!-- Modal simples -->
+      <div class="modal-backdrop" *ngIf="formVisible">
+        <div class="modal">
+          <h3>{{ editando ? 'Editar Veículo' : 'Novo Veículo' }}</h3>
+
+          <div class="modal-body">
+            <label>
+              Placa
+              <input type="text" [(ngModel)]="form.placa" />
+            </label>
+            <label>
+              Modelo
+              <input type="text" [(ngModel)]="form.modelo" />
+            </label>
+            <label>
+              Cor
+              <input type="text" [(ngModel)]="form.cor" />
+            </label>
+            <label>
+              Status
+              <select [(ngModel)]="form.ativo">
+                <option [ngValue]="true">Ativo</option>
+                <option [ngValue]="false">Inativo</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="modal-actions">
+            <button class="secondary-btn" (click)="cancelar()">Cancelar</button>
+            <button class="primary-btn" (click)="salvar()">
+              {{ editando ? 'Atualizar' : 'Salvar' }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+

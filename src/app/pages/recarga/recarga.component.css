@@ -1,0 +1,221 @@
+:host {
+  display: block;
+  background-color: #0b0c10;
+  color: #c5c6c7;
+  padding: 20px;
+  min-height: 100vh;
+  font-family: sans-serif;
+}
+
+.payment-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 30px;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: #1fa2ff;
+  cursor: pointer;
+  padding: 5px 0;
+  margin-bottom: 20px;
+  font-size: 1em;
+  display: flex;
+  align-items: center;
+}
+
+.arrow-icon {
+  margin-right: 8px;
+  font-size: 1.2em;
+}
+
+h1 {
+  font-size: 2em;
+  margin: 0;
+  color: #1fa2ff;
+}
+
+p.subtitle {
+  color: #888;
+  font-size: 0.9em;
+}
+
+.current-balance {
+  background-color: #0d0d0d;
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.balance-info .label {
+  display: block;
+  font-size: 0.9em;
+  color: #a8a9ad;
+}
+
+.balance-info .value {
+  font-size: 2.2em;
+  font-weight: bold;
+  color: #0e78cc;
+}
+
+.icon-wallet {
+  color: #0e78cc;
+}
+
+.payment-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.card {
+  background-color: #0d0d0d;
+  padding: 25px;
+  border-radius: 8px;
+}
+
+h3 {
+  margin-top: 0;
+  color: #c5c6c7;
+  font-size: 1.2em;
+}
+
+.value-input {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin: 10px 0 20px;
+  border: 1px solid #0e78cc;
+  border-radius: 4px;
+  background-color: #0b0c10;
+  color: #c5c6c7;
+  font-size: 1.2em;
+  box-sizing: border-box;
+}
+
+.quick-values .button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.quick-values button {
+  background-color: #0b0c10;
+  color: #1fa2ff;
+  border: 1px solid #0e78cc;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.quick-values button.selected,
+.quick-values button:hover {
+  background-color: #0e78cc;
+  color: #0b0c10;
+  border-color: #45a29e;
+}
+
+.method-option {
+  padding: 15px;
+  border: 1px solid #1f2833;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.method-option:hover {
+  border-color: #1fa2ff;
+}
+
+.method-option.selected {
+  border-color: #0e78cc;
+  background-color: #151b20;
+}
+
+.icon-label {
+  display: flex;
+  align-items: center;
+}
+
+.method-icon {
+  font-size: 1.5em;
+  margin-right: 15px;
+}
+
+.method-details h4 {
+  margin: 0;
+  color: #c5c6c7;
+}
+
+.method-details p {
+  margin: 0;
+  font-size: 0.8em;
+  color: #888;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1f2833;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.total-info .label {
+  display: block;
+  color: #a8a9ad;
+}
+
+.total-info .value {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #1fa2ff;
+}
+
+.confirm-button {
+  background-color: #0e78cc;
+  color: #0b0c10;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 4px;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.confirm-button:hover:not([disabled]) {
+  background-color: #1fa2ff;
+}
+
+.confirm-button[disabled] {
+  background-color: #2f3640;
+  cursor: not-allowed;
+  color: #888;
+}
+
+@media (max-width: 768px) {
+  .payment-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .confirm-button {
+    width: 100%;
+    margin-top: 15px;
+  }
+}

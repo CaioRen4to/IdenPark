@@ -1,10 +1,87 @@
 .layout {
-    display: flex;
-    height: 100dvh;
-    background: #0b0e13	;
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  background: #0b0e13;
 }
 
-.dashboard {
-    flex: 1;
-    padding: 24px;
+.content {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+  box-sizing: border-box;
 }
+
+.wallet-card {
+  max-width: 600px;
+  margin: 0 auto;
+  background: #0d0d0d;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.4);
+}
+
+.wallet-card h1 {
+  color: #1fa2ff;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: #b5b5b5;
+  margin-bottom: 20px;
+}
+
+.saldo-box {
+  background: #050607;
+  border-radius: 10px;
+  padding: 20px;
+  border: 1px solid #0e78cc;
+}
+
+.saldo-box .label {
+  display: block;
+  color: #b5b5b5;
+  margin-bottom: 6px;
+}
+
+.saldo-box .value {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1fa2ff;
+  margin-bottom: 10px;
+}
+
+.actions {
+  margin: 12px 0;
+}
+
+.primary-btn {
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  background: #0e78cc;
+  color: #050607;
+}
+
+.primary-btn:hover {
+  background: #1fa2ff;
+}
+
+.saldo-box .hint {
+  font-size: 0.9rem;
+  color: #9a9a9a;
+}
+
+.saldo-box .hint a {
+  color: #1fa2ff;
+  text-decoration: none;
+}
+
+.saldo-box .hint a:hover {
+  text-decoration: underline;
+}
+
+

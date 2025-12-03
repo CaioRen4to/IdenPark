@@ -1,0 +1,290 @@
+<div class="admin-content">
+    <!-- Menu de navegação interno do Admin -->
+    <nav class="admin-internal-nav">
+      <a 
+        *ngFor="let item of navItems" 
+        [class.active]="selectedView === item.view" 
+        (click)="selectView(item.view)"
+        class="nav-tab"
+      >
+        <span class="nav-icon">{{ item.icon }}</span> {{ item.label }}
+      </a>
+    </nav>
+
+    <header class="top-header">
+      <h2>{{ currentViewTitle }}</h2>
+      <div class="header-actions">
+        <button
+          *ngIf="selectedView === 'users'"
+          class="action-button primary"
+          (click)="openCreateUserForm()"
+        >
+          Adicionar Usuário
+        </button>
+        <button *ngIf="selectedView === 'vehicles'" class="action-button primary">Adicionar Veículo</button>
+        <button *ngIf="selectedView === 'reports'" class="action-button secondary">Exportar (.XLS)</button>
+      </div>
+    </header>
+
+    <div *ngIf="selectedView === 'dashboard'" class="dashboard-view">
+      
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <span class="kpi-label">Veículos Dentro</span>
+          <span class="kpi-value">47</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Vagas Livres</span>
+          <span class="kpi-value">153</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Receita Hoje</span>
+          <span class="kpi-value">R$ 1.250</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Tempo Médio</span>
+          <span class="kpi-value">2h 15m</span>
+        </div>
+      </div>
+
+      <div class="dashboard-panels">
+        <div class="panel status-panel">
+          <h3>Status das Cancelas (RF-017)</h3>
+          <ul class="status-list">
+            <li *ngFor="let status of cancelaStatus">
+              {{ status.name }} - {{ status.type }} 
+              <span [class]="status.status.toLowerCase()">{{ status.status }}</span>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="panel events-panel">
+          <h3>Eventos Recentes</h3>
+          <ul class="events-list">
+            <li *ngFor="let event of recentEvents">
+              {{ event.plate }} ({{ event.user }}) - {{ event.type }}
+              <span class="timestamp">{{ event.time }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="panel incidents-panel">
+        <h3>🚨 Incidentes e Alarmes (RF-018)</h3>
+        <p *ngIf="incidents.length === 0" class="no-incidents">Nenhum incidente aberto.</p>
+        <ul class="incidents-list" *ngIf="incidents.length > 0">
+          <li *ngFor="let incident of incidents">
+            {{ incident.type }} em {{ incident.location }}: {{ incident.description }}
+            <button class="resolve-button">Resolver</button>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div *ngIf="selectedView === 'users'" class="users-view">
+      <!-- Modal simples de criação/edição de usuário -->
+      <div class="modal-backdrop" *ngIf="userFormVisible">
+        <div class="modal">
+          <h3 *ngIf="userFormMode === 'create'">Novo Usuário</h3>
+          <h3 *ngIf="userFormMode === 'edit'">Editar Usuário</h3>
+          <h3 *ngIf="userFormMode === 'balance'">Ajuste de Saldo</h3>
+
+          <!-- Form de dados básicos -->
+          <div *ngIf="userFormMode === 'create' || userFormMode === 'edit'" class="modal-body">
+            <label>
+              Nome
+              <input type="text" [(ngModel)]="userForm.name" />
+            </label>
+            <label>
+              Email
+              <input type="email" [(ngModel)]="userForm.email" />
+            </label>
+            <label>
+              Tipo
+              <select [(ngModel)]="userForm.type">
+                <option value="FUNCIONARIO">Funcionário</option>
+                <option value="ALUNO">Aluno</option>
+                <option value="ADMIN">Admin</option>
+                <option value="OPERADOR">Operador</option>
+              </select>
+            </label>
+            <label>
+              Status
+              <select [(ngModel)]="userForm.status">
+                <option value="ATIVO">Ativo</option>
+                <option value="INATIVO">Inativo</option>
+              </select>
+            </label>
+          </div>
+
+          <!-- Form de ajuste de saldo (crédito/débito/estorno) -->
+          <div *ngIf="userFormMode === 'balance'" class="modal-body">
+            <p>Saldo atual: {{ editingUser?.balance ?? 0 | currency: 'BRL' : 'symbol' : '1.2-2' }}</p>
+            <label>
+              Valor (use número negativo para débito/estorno)
+              <input
+                type="number"
+                [(ngModel)]="balanceAdjustment.amount"
+                placeholder="Ex: 50 para crédito, -20 para débito"
+              />
+            </label>
+            <label>
+              Motivo (obrigatório)
+              <textarea
+                rows="3"
+                [(ngModel)]="balanceAdjustment.reason"
+                placeholder="Descreva o motivo do ajuste"
+              ></textarea>
+            </label>
+          </div>
+
+          <div class="modal-actions">
+            <button class="action-button secondary" (click)="closeUserForm()">Cancelar</button>
+            <button
+              class="action-button primary"
+              *ngIf="userFormMode === 'create'"
+              (click)="saveUser()"
+            >
+              Salvar
+            </button>
+            <button
+              class="action-button primary"
+              *ngIf="userFormMode === 'edit'"
+              (click)="saveUser()"
+            >
+              Atualizar
+            </button>
+            <button
+              class="action-button primary"
+              *ngIf="userFormMode === 'balance'"
+              (click)="applyBalanceAdjustment()"
+            >
+              Aplicar Ajuste
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="filter-bar">
+        <input type="text" placeholder="Pesquisar por Nome, Email ou Saldo..." [(ngModel)]="searchTerm" (input)="filterUsers()">
+        <select [(ngModel)]="filterType" (change)="filterUsers()">
+          <option value="">Todos os Tipos</option>
+          <option value="FUNCIONARIO">Funcionário</option>
+          <option value="ALUNO">Aluno</option>
+          <option value="ADMIN">Admin</option>
+          <option value="OPERADOR">Operador</option>
+        </select>
+        <button class="action-button secondary">Atualizar</button>
+      </div>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>NOME</th>
+            <th>EMAIL</th>
+            <th>TIPO</th>
+            <th>STATUS</th>
+            <th>SALDO</th>
+            <th>AÇÕES</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of filteredUsers">
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td><span class="tag tag-{{ user.type.toLowerCase() }}">{{ user.type }}</span></td>
+            <td>{{ user.status }}</td>
+            <td>{{ user.balance ? (user.balance | currency:'BRL':'symbol':'1.2-2') : '-' }}</td>
+            <td>
+              <button class="edit-btn" (click)="openEditUserForm(user)">Editar</button>
+              <button class="edit-btn" (click)="openBalanceForm(user)">Ajustar Saldo</button>
+              <button class="delete-btn" (click)="deleteUser(user)">Deletar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div *ngIf="selectedView === 'vehicles'" class="vehicles-view">
+      <div class="filter-bar">
+        <input type="text" placeholder="Pesquisar por Placa, Usuário ou Modelo..." [(ngModel)]="searchVehicleTerm" (input)="filterVehicles()">
+        <button class="action-button secondary">Atualizar</button>
+      </div>
+      
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>PLACA</th>
+            <th>MODELO</th>
+            <th>COR</th>
+            <th>USUÁRIO</th>
+            <th>TIPO</th>
+            <th>STATUS</th>
+            <th>AÇÕES</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let vehicle of filteredVehicles">
+            <td>{{ vehicle.plate }}</td>
+            <td>{{ vehicle.model }}</td>
+            <td>{{ vehicle.color }}</td>
+            <td>{{ vehicle.userName }}</td>
+            <td><span class="tag tag-{{ vehicle.userType.toLowerCase() }}">{{ vehicle.userType }}</span></td>
+            <td>{{ vehicle.status }}</td>
+            <td>
+              <button class="edit-btn" (click)="editVehicle(vehicle)">Editar</button>
+              <button class="delete-btn" (click)="deleteVehicle(vehicle)">Deletar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div *ngIf="selectedView === 'tariffs'" class="tariffs-view">
+      <h3>CRUD de Tarifas e Regras de Cobrança (RF-022)</h3>
+      <p>Essencial para configurar o cálculo (RN-001 a RN-006).</p>
+      <button class="action-button primary">Nova Tarifa</button>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>NOME</th>
+            <th>TOLERÂNCIA</th>
+            <th>FRAÇÃO</th>
+            <th>TETO DIÁRIO</th>
+            <th>PERNOITE</th>
+            <th>ATIVO</th>
+            <th>AÇÕES</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Padrão Aluno</td>
+            <td>10 min (RN-003)</td>
+            <td>15 min (RN-002)</td>
+            <td>R$ 30,00</td>
+            <td>Sim</td>
+            <td>Sim</td>
+            <td>
+              <button class="edit-btn">Detalhes</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div *ngIf="selectedView === 'logs'" class="logs-view">
+      <h3>Trilha de Logs e Auditoria (Ações Sensíveis - RF-020)</h3>
+      <p>Registra toda ação sensível como: aberturas manuais (RN-013), estornos (RN-010) e alterações de regras (RF-020).</p>
+    </div>
+    
+    <div *ngIf="selectedView === 'reports'" class="reports-view">
+      <h3>Relatórios Operacionais e Financeiros (RF-021)</h3>
+      <p>Gerar relatórios de receita por dia/mês, uso por perfil e tempo médio de permanência. (UC-08)</p>
+    </div>
+    
+    <div *ngIf="selectedView === 'settings'" class="settings-view">
+      <h3>Configuração de Pontos de Controle e Parâmetros (RF-024)</h3>
+      <p>Configuração de Cancelas, Zonas de Estacionamento e Parâmetros de sistema.</p>
+    </div>
+
+</div>
