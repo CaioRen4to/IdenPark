@@ -2,8 +2,6 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
 
-  
-
   { 
     path: 'login', 
     loadComponent: () => import('./pages/validacao/login/login').then(m => m.Login) 
@@ -13,9 +11,10 @@ export const routes: Routes = [
     path: 'cadastro', 
     loadComponent: () => import('./pages/validacao/cadastro/cadastro').then(m => m.Cadastro) 
   },
+
   {
-  path: 'admin',
-  loadComponent: () => import('./pages/admin/admin').then(m => m.Admin)
+    path: 'admin',
+    loadComponent: () => import('./pages/admin/admin').then(m => m.Admin)
   },
 
   { 
@@ -27,7 +26,11 @@ export const routes: Routes = [
     path: 'alunos', 
     loadComponent: () => import('./pages/alunos/alunos').then(m => m.Alunos) 
   },
+
+  // ✅ MUDANÇA AQUI: Redireciona para funcionario em vez de login
   { 
-    path: '', redirectTo: '/login', pathMatch: 'full' 
+    path: '', 
+    redirectTo: '/funcionario',  // ← AQUI!
+    pathMatch: 'full' 
   },
 ];
