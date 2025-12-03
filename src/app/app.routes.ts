@@ -2,10 +2,16 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
 
+<<<<<<< HEAD
+  { 
+    path: 'login', 
+    loadComponent: () => import('./pages/validacao/login/login').then(m => m.Login) 
+=======
   {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
+>>>>>>> 641ad4d23de2ccefc56330df82c7a65d3d46b63a
   },
 
   {
@@ -35,7 +41,31 @@ export const routes: Routes = [
       import('./pages/funcionario/funcionario')
       .then(m => m.Funcionario)
   },
+
   {
+<<<<<<< HEAD
+    path: 'admin',
+    loadComponent: () => import('./pages/admin/admin').then(m => m.Admin)
+  },
+
+  { 
+    path: 'funcionario', 
+    loadComponent: () => import('./pages/funcionario/funcionario').then(m => m.Funcionario) 
+  },
+
+  { 
+    path: 'alunos', 
+    loadComponent: () => import('./pages/alunos/alunos').then(m => m.Alunos) 
+  },
+
+  // ✅ MUDANÇA AQUI: Redireciona para funcionario em vez de login
+  { 
+    path: '', 
+    redirectTo: '/funcionario',  // ← AQUI!
+    pathMatch: 'full' 
+  },
+];
+=======
     path: 'carteira',
     loadComponent: () =>
       import('./pages/carteira/carteira')
@@ -77,3 +107,4 @@ export const routes: Routes = [
     redirectTo: 'login'
   }
 ];
+>>>>>>> 641ad4d23de2ccefc56330df82c7a65d3d46b63a
