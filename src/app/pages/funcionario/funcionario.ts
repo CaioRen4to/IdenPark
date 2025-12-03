@@ -7,10 +7,6 @@ import { Sidebar } from '../../ComponentsCompartilhados/sidebar/sidebar';
   standalone: true,
   imports: [PainelFuncionario, Sidebar],
   templateUrl: './funcionario.html',
-  styleUrl: './funcionario.css',
+  styleUrls: ['./funcionario.css'],
 })
-
-
-export class Funcionario {
-
-}
+export class Funcionario {}

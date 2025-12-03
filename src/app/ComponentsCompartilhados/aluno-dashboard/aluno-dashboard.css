@@ -1,11 +1,12 @@
 .dashboard {
   max-width: 900px;
   margin: 0 auto;
+  font-family: "Inter", sans-serif;
+  color: #d6d6d6;
 }
 
 h1 {
   font-size: 32px;
-  font-weight: 600;
 }
 
 .subtitle {
@@ -21,14 +22,13 @@ h1 {
 }
 
 .card {
-  background: #fff;
+  background: #1A3D64;
   flex: 1;
   min-width: 260px;
   padding: 25px;
   border-radius: 12px;
-  border: 1px solid #ddd;
   text-align: center;
-  box-shadow: 2px 2px 6px #0001;
+  box-shadow: 0px 0px 6px #0001;
 }
 
 .icon {
@@ -42,7 +42,7 @@ h1 {
 }
 
 .card p {
-  color: #555;
+  color: #bbbbbb;
   margin-bottom: 15px;
 }
 
@@ -56,26 +56,43 @@ h1 {
 
 .entrada-btn {
   background: #007bff;
+  transition: 0.25s ease;
+  letter-spacing: 0.3px;
+}
+
+.entrada-btn:hover {
+  background: #3094ff;
+  box-shadow: 0px 0px 6px #006adb;
+  transform: translateY(-5px);
 }
 
 .saída-btn {
-  background: #d9534f;
+  background: #ff5751;
+  transition: 0.25s ease;
+  letter-spacing: 0.3px;
+}
+
+.saída-btn:hover {
+  background: #ff625d;
+  box-shadow: 0px 0px 8px #ff2c24;
+  transform: translateY(-5px);
 }
 
 /* Card info */
 .info {
-  background: #fff;
+  background: #1A3D64;
   padding: 20px;
   border-radius: 12px;
-  border: 1px solid #ddd;
-  box-shadow: 2px 2px 6px #0001;
+  border: 1px solid #252525;
+  box-shadow: 0px 0px 6px #1d546c86;
 }
 
 .info h3 {
   margin-bottom: 15px;
+  color: white;
 }
 
 .info ul {
-  color: #555;
+  color: #bdbdbd;
   line-height: 1.6;
 }

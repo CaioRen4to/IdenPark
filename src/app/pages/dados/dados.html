@@ -1,0 +1,52 @@
+<div class="layout">
+  <app-sidebar></app-sidebar>
+
+  <main class="content">
+    <section class="profile-card">
+      <h1>Alterar Dados</h1>
+      <p class="subtitle">
+        Atualize suas informações pessoais e, se quiser, altere sua senha de acesso.
+      </p>
+
+      <div *ngIf="!user">
+        <p>Nenhum usuário logado. Faça login para alterar seus dados.</p>
+      </div>
+
+      <form *ngIf="user" (ngSubmit)="salvar()" class="form">
+        <label>
+          Nome completo
+          <input type="text" [(ngModel)]="nome" name="nome" />
+        </label>
+
+        <label>
+          Email
+          <input type="email" [(ngModel)]="email" name="email" />
+        </label>
+
+        <div class="read-only">
+          <span class="label">Perfil</span>
+          <span class="value">{{ user.permissao }}</span>
+        </div>
+
+        <h2>Alterar senha</h2>
+        <p class="hint">
+          Preencha os campos abaixo apenas se desejar alterar sua senha.
+        </p>
+
+        <label>
+          Senha atual
+          <input type="password" [(ngModel)]="senhaAtual" name="senhaAtual" />
+        </label>
+
+        <label>
+          Nova senha
+          <input type="password" [(ngModel)]="novaSenha" name="novaSenha" />
+        </label>
+
+        <button type="submit" class="primary-btn">Salvar alterações</button>
+      </form>
+    </section>
+  </main>
+</div>
+
+

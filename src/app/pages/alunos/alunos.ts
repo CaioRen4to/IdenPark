@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import { Sidebar } from '../../ComponentsCompartilhados/sidebar/sidebar';
 import { AlunoDashboard } from '../../ComponentsCompartilhados/aluno-dashboard/aluno-dashboard';
-import { RouterOutlet } from '@angular/router';
+
 
 
 @Component({
   selector: 'app-alunos',
-  imports: [Sidebar, AlunoDashboard],
+  standalone: true,
+  imports: [RouterOutlet, Sidebar, AlunoDashboard],
   templateUrl: './alunos.html',
-  styleUrl: './alunos.css',
+  styleUrls: ['./alunos.css'],
 })
-export class Alunos {
-
-}
+export class Alunos {}

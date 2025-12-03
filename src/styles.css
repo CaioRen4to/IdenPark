@@ -1,11 +1,26 @@
-*{
-    margin:0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
 }
-html, body {
-    margin: 0; 
-    padding: 0; 
-    height: 100%; 
-    background: #050607; 
+
+:root {
+  --bg-root: #0b0e13;
+  --bg-card: #0d0d0d;
+  --accent-primary: #1fa2ff;
+  --accent-primary-dark: #0e78cc;
+  --text-primary: #ffffff;
+  --text-muted: #b5b5b5;
 }
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: radial-gradient(circle at top, var(--bg-root) 0%, #050607 80%);
+  color: var(--text-primary);
+}
+
+

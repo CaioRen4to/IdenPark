@@ -1,0 +1,61 @@
+<div class="layout">
+  <app-sidebar></app-sidebar>
+
+  <main class="content">
+    <section class="history-card">
+      <h1>Histórico / Extrato</h1>
+      <p class="subtitle">
+        Veja todas as suas recargas, débitos de estadia e ajustes efetuados na carteira.
+      </p>
+
+      <div *ngIf="!user">
+        <p>Nenhum usuário logado. Faça login para visualizar o extrato.</p>
+      </div>
+
+      <div *ngIf="user">
+        <div class="filters">
+          <label>
+            Tipo de transação
+            <select [(ngModel)]="filtroTipo">
+              <option value="TODOS">Todos</option>
+              <option value="CREDITO">Créditos</option>
+              <option value="DEBITO">Débitos</option>
+              <option value="AJUSTE">Ajustes/Estornos</option>
+            </select>
+          </label>
+
+          <button class="export-btn" (click)="exportarCSV()">Exportar CSV</button>
+        </div>
+
+        <table class="data-table" *ngIf="transacoesFiltradas.length; else semDados">
+          <thead>
+            <tr>
+              <th>Data/Hora</th>
+              <th>Tipo</th>
+              <th>Valor</th>
+              <th>Descrição</th>
+              <th>Método</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let t of transacoesFiltradas">
+              <td>{{ t.createdAt | date: 'short' }}</td>
+              <td>{{ t.type }}</td>
+              <td [class.credito]="t.type === 'CREDITO'" [class.debito]="t.type !== 'CREDITO'">
+                {{ t.amount | currency: 'BRL' : 'symbol' : '1.2-2' }}
+              </td>
+              <td>{{ t.description }}</td>
+              <td>{{ t.method || '-' }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <ng-template #semDados>
+          <p class="empty">Nenhuma transação encontrada.</p>
+        </ng-template>
+      </div>
+    </section>
+  </main>
+</div>
+
+

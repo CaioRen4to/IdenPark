@@ -11,7 +11,7 @@
             [id]="field.name"
             [name]="field.name"
             [placeholder]="field.placeholder"
-            (change)="onFieldChange(field, $event)"
+            (input)="onFieldChange(field, $event)"
             required
           />
         } @else {

@@ -1,31 +1,40 @@
 <div class="sidebar">
-
   <div>
     <div class="logo">
-      <img src="/img/logosemfundo.png" alt="Finance Agenda Logo" class="image-logo"/> 
+      <img src="/img/logosemfundo.png" alt="Finance Agenda Logo" class="image-logo" />
 
-        <small>Sistema de Estacionamento</small>
+      <small>Sistema de Estacionamento</small>
     </div>
 
-    <hr class="divider">
-    
-    
+    <hr class="divider" />
+
     <nav>
-        <a class="menu-item">Recarregar</a>
-        <a class="menu-item">Historico</a>
-        <a class="menu-item">Alterar Dados</a>
-        <a class="menu-item">Alterar Placa</a>
-    </nav>
-    </div>
+      <a class="menu-item" (click)="goHome()">Home</a>
 
-    <hr class="divider">
+      <!-- Itens comuns para todos os perfis -->
+      <a class="menu-item" routerLink="/carteira">Carteira / Saldo</a>
+      <a class="menu-item" routerLink="/historico">Historico</a>
+      <a class="menu-item" routerLink="/veiculos">Gestão de Veículos</a>
+      <a class="menu-item" routerLink="/dados">Alterar Dados</a>
+
+      <!-- Extras para Funcionário -->
+      <a *ngIf="role === 'funcionario'" class="menu-item" routerLink="/funcionario">
+        Painel Operacional
+      </a>
+
+      <!-- Extras para Admin -->
+      <a *ngIf="role === 'administrador'" class="menu-item" routerLink="/admin"> Painel Admin </a>
+    </nav>
+  </div>
+
+  <hr class="divider" />
 
   <div class="bottom">
     <div class="user-info">
-      <span class="label">Usuário </span>
-      <span class="value"> Aluno/Fucionario/Admin</span>
-
+      <span class="label">Usuário: </span>
+      <span class="value"> {{ role | titlecase }} {{ nome }} </span>
     </div>
+
     <button class="logout">Sair</button>
   </div>
 </div>

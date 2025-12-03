@@ -2,10 +2,9 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-aluno-dashboard',
+  standalone: true,
   imports: [],
   templateUrl: './aluno-dashboard.html',
-  styleUrl: './aluno-dashboard.css',
+  styleUrls: ['./aluno-dashboard.css'],
 })
-export class AlunoDashboard {
-
-}
+export class AlunoDashboard {}
