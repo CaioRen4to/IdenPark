@@ -1,5 +1,10 @@
 <div class="dashboard">
 
+  <div *ngIf="aviso" class="aviso-topo">
+    {{ aviso }}
+  </div>
+
+
   <h1>Painel do Aluno</h1>
   <p class="subtitle">Registre sua entrada ou saída do estacionamento</p>
 
@@ -9,14 +14,18 @@
       <div class="icon">➡️</div>
       <h2>Registrar Entrada</h2>
       <p>Clique aqui para registrar sua entrada no estacionamento</p>
-      <button class="btn entrada-btn">Registrar Entrada</button>
+      <button class="btn entrada-btn" 
+            (click)="mostrarAviso('Entrada registrada!')">
+        Registrar Entrada</button>
     </div>
 
     <div class="card saída">
       <div class="icon">⬅️</div>
       <h2>Registrar Saída</h2>
       <p>Clique aqui para registrar sua saída do estacionamento</p>
-      <button class="btn saída-btn">Registrar<br> Saída</button>
+      <button class="btn saída-btn"
+          (click)="mostrarAviso('Saída registrada!')">
+           Registrar<br> Saída</button>
     </div>
 
   </div>
@@ -24,9 +33,9 @@
   <div class="info">
     <h3>Informações Importantes</h3>
     <ul>
-      <li>• Certifique-se de registrar sua entrada ao chegar</li>
-      <li>• Não esqueça de registrar sua saída ao deixar o estacionamento</li>
-      <li>• Em caso de dúvidas, procure a administração</li>
+      <li> Certifique-se de registrar sua entrada ao chegar</li>
+      <li> Não esqueça de registrar sua saída ao deixar o estacionamento</li>
+      <li> Em caso de dúvidas, procure a administração</li>
     </ul>
   </div>
 
