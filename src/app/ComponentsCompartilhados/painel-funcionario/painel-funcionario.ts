@@ -28,17 +28,14 @@ interface Historico {
 })
 export class PainelFuncionario {
   
-  // Estatísticas
   funcionariosAtivos = 8;
   entradasHoje = 0;
   saidasHoje = 0;
   saldoTotal = 450.50;
 
-  // Arrays
   veiculos: Veiculo[] = [];
   historico: Historico[] = [];
 
-  // Formulário
   novoVeiculo = {
     placa: '',
     modelo: '',
@@ -52,23 +49,19 @@ export class PainelFuncionario {
     console.log('Dashboard carregado!');
   }
 
-  // ===== VEÍCULOS ESTACIONADOS =====
   get veiculosEstacionados(): Veiculo[] {
     return this.veiculos.filter(v => v.status === 'estacionado');
   }
 
-  // ===== ADICIONAR VEÍCULO =====
   adicionarVeiculo() {
-    // Validação
+
     if (!this.novoVeiculo.placa || !this.novoVeiculo.tipo) {
       alert('❌ Preencha os campos obrigatórios (Placa e Tipo)!');
       return;
     }
 
-    // Formata placa
     const placaFormatada = this.novoVeiculo.placa.toUpperCase().trim();
 
-    // Verifica se já existe
     const jaExiste = this.veiculos.some(
       v => v.placa === placaFormatada && v.status === 'estacionado'
     );
@@ -78,7 +71,6 @@ export class PainelFuncionario {
       return;
     }
 
-    // Cria o veículo
     const veiculo: Veiculo = {
       placa: placaFormatada,
       modelo: this.novoVeiculo.modelo || 'Não informado',
@@ -90,27 +82,22 @@ export class PainelFuncionario {
       status: 'estacionado'
     };
 
-    // Adiciona na lista
     this.veiculos.push(veiculo);
 
-    // Adiciona no histórico
     this.historico.unshift({
       placa: placaFormatada,
       tipo: 'entrada',
       hora: new Date()
     });
 
-    // Atualiza estatísticas
     this.entradasHoje++;
 
-    // Limpa o formulário
     this.limparFormulario();
 
     console.log('✅ Veículo adicionado:', veiculo);
     alert(`✅ Veículo ${placaFormatada} registrado com sucesso!`);
   }
 
-  // ===== REGISTRAR SAÍDA =====
   registrarSaida(index: number) {
     const veiculo = this.veiculosEstacionados[index];
     
@@ -122,21 +109,18 @@ export class PainelFuncionario {
 
     if (!confirmacao) return;
 
-    // Calcula o valor (exemplo: R$ 5,00/hora)
     const horas = this.calcularHoras(veiculo.horaEntrada);
     const valor = this.calcularValor(horas);
 
-    // Atualiza status
+   
     veiculo.status = 'saiu';
 
-    // Adiciona no histórico
+    
     this.historico.unshift({
       placa: veiculo.placa,
       tipo: 'saida',
       hora: new Date()
     });
-
-    // Atualiza estatísticas
     this.saidasHoje++;
     this.saldoTotal += valor;
 
@@ -145,7 +129,7 @@ export class PainelFuncionario {
     console.log('🚗 Saída registrada:', veiculo);
   }
 
-  // ===== CALCULAR TEMPO =====
+  // calcular tempo
   calcularTempo(horaEntrada: Date): string {
     const agora = new Date();
     const diff = agora.getTime() - new Date(horaEntrada).getTime();
@@ -160,7 +144,7 @@ export class PainelFuncionario {
     return `${horas}h ${minutos}min`;
   }
 
-  // ===== CALCULAR HORAS =====
+  // calcular hrs
   calcularHoras(horaEntrada: Date): number {
     const agora = new Date();
     const diff = agora.getTime() - new Date(horaEntrada).getTime();
@@ -168,7 +152,7 @@ export class PainelFuncionario {
     return horas;
   }
 
-  // ===== CALCULAR VALOR =====
+  // calcuar valor
   calcularValor(horas: number): number {
     // Exemplo: R$ 5,00 primeira hora + R$ 3,00 hora adicional
     if (horas <= 1) {
@@ -177,7 +161,6 @@ export class PainelFuncionario {
     return 5.00 + (horas - 1) * 3.00;
   }
 
-  // ===== LIMPAR FORMULÁRIO =====
   limparFormulario() {
     this.novoVeiculo = {
       placa: '',
